@@ -125,7 +125,10 @@ namespace Tree {
         
         custom_assert (tree, pointer_is_null, NULL_TREE_POINTER);
         
-        TreeError errors = DestroySubtreeNode (tree, tree->root);
+        TreeError errors = NO_TREE_ERRORS;
+
+        if (tree->root)
+            errors = DestroySubtreeNode (tree, tree->root);
     
         tree->root = NULL;
         tree->creationData = CallData {NULL, -1, NULL};
