@@ -63,7 +63,7 @@ namespace Tree {
         if (node->left)
             VerifyChild_ (left);
     
-        if (node->left)
+        if (node->right)
             VerifyChild_(right);
     
         #undef VerifyChild_
