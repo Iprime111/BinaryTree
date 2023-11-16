@@ -12,7 +12,7 @@
 namespace Tree {
     #define TreeVerification(tree)                                      \
                 do {                                                    \
-                    TreeError verificationResult_ = VerifyTree_ (tree); \
+                    TreeError verificationResult_ = VerifyTree (tree); \
                     if (verificationResult_ != NO_TREE_ERRORS) {        \
                         RETURN verificationResult_;                     \
                     }                                                   \
@@ -123,7 +123,7 @@ namespace Tree {
         
         custom_assert (tree, pointer_is_null, NULL_TREE_POINTER);
         
-        TreeError errors = DestroySubtreeNode_ (tree, tree->root);
+        TreeError errors = DestroySubtreeNode (tree, tree->root);
     
         tree->root = NULL;
         tree->creationData = {};
@@ -139,12 +139,12 @@ namespace Tree {
         custom_assert (node, pointer_is_null, NULL_NODE_POINTER);
     
         if (node->left)
-            WriteError (tree, DestroySubtreeNode_ (tree, node->left));
+            WriteError (tree, DestroySubtreeNode (tree, node->left));
     
         if (node->right)
-            WriteError (tree, DestroySubtreeNode_ (tree, node->right));
+            WriteError (tree, DestroySubtreeNode (tree, node->right));
         
-        WriteError (tree, DestroySingleNode_ (node));
+        WriteError (tree, DestroySingleNode (node));
     
         RETURN tree->errors;
     }
@@ -212,6 +212,8 @@ namespace Tree {
         
         custom_assert (tree,        pointer_is_null, NULL_TREE_POINTER);
         custom_assert (nodePointer, pointer_is_null, NULL_NODE_POINTER);
+
+        TreeVerification (tree);
     
         if (nodePointer->parent) {
             if (nodePointer == nodePointer->parent->left) {
