@@ -54,9 +54,9 @@ namespace Tree {
     };
     
     template <typename T>
-    TreeError VerifyTree_  (Tree <T> *tree);
+    TreeError VerifyTree  (Tree <T> *tree);
     template <typename T>
-    TreeError VerifyNode_  (Tree <T> *tree, Node <T> *node);
+    TreeError VerifyNode  (Tree <T> *tree, Node <T> *node);
 
     template <typename T>
     TreeError InitTree_    (Tree <T> *tree,  CallData callData);
@@ -64,11 +64,11 @@ namespace Tree {
     TreeError InitNode_    (Node <T> **node, CallData callData);
 
     template <typename T>
-    TreeError DestroyTree_        (Tree <T> *tree);
+    TreeError DestroyTree        (Tree <T> *tree);
     template <typename T>
-    TreeError DestroySingleNode_  (Node <T> *node);
+    TreeError DestroySingleNode  (Node <T> *node);
     template <typename T> 
-    TreeError DestroySubtreeNode_ (Tree <T> *tree, Node <T> *node);
+    TreeError DestroySubtreeNode (Tree <T> *tree, Node <T> *node);
 
     template <typename T>
     TreeError AddNode_    (Tree <T> *tree, Node <T> *leaf, TreeEdge direction, CallData callData);
@@ -79,8 +79,18 @@ namespace Tree {
     TreeError PrintTree_  (Tree <T> *tree, PrintType printType, FILE *stream, CallData callData);
 
     template <typename T>
-    TreeError PrintNodeValue   (Node <T> *node);
+    TreeError PrintNodeValue   (Node <T> *node, FILE *stream);
     template <typename T>
     TreeError SnprintNodeValue (Node <T> *node, char *buffer, size_t maxLength);
+
+    #define CreateCallData {__FILE__, __LINE__, __PRETTY_FUNCTION__}
+
+    #define InitTree(tree) InitTree_ (tree, CreateCallData)
+    #define InitNode(node) InitNode_ (node, CreateCallData)
+
+    #define AddNode(tree, leaf, direction) AddNode_    (tree, leaf, direction, CreateCallData)
+    #define DeleteNode(tree, nodePointer)  DeleteNode_ (tree, nodePointer,     CreateCallData)
+
+    #define PrintTree(tree, printType, stream) PrintTree_ (tree, printType, stream, CreateCallData)
 }
 #endif

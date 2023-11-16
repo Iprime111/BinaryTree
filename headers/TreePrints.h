@@ -8,8 +8,8 @@
 namespace Tree {
 
     template <typename T>
-    TreeError PrintNodeValue (Node <T> *node) {
-        printf ("%x", node->nodeData);
+    TreeError PrintNodeValue (Node <T> *node, FILE *stream) {
+        fprintf (stream, "%x", node->nodeData);
 
         return NO_TREE_ERRORS;
     }

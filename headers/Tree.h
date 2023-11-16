@@ -34,7 +34,7 @@ namespace Tree {
     static TreeError InternalPrint_ (Node <T> *node, PrintType printType, FILE *stream);
     
     template <typename T>
-    TreeError VerifyTree_ (Tree <T> *tree) {
+    TreeError VerifyTree (Tree <T> *tree) {
         PushLog (3);
     
         if (!tree) {
@@ -72,7 +72,7 @@ namespace Tree {
     }
     
     template <typename T>
-    TreeError VerifyNode_ (Tree <T> *tree, Node <T> *node) {
+    TreeError VerifyNode (Tree <T> *tree, Node <T> *node) {
         PushLog (3);
     
         if (!tree) {
@@ -118,7 +118,7 @@ namespace Tree {
     }
     
     template <typename T>
-    TreeError DestroyTree_ (Tree <T> *tree) {
+    TreeError DestroyTree (Tree <T> *tree) {
         PushLog (3);
         
         custom_assert (tree, pointer_is_null, NULL_TREE_POINTER);
@@ -132,7 +132,7 @@ namespace Tree {
     }
     
     template <typename T>
-    TreeError DestroySubtreeNode_ (Tree <T> *tree, Node <T> *node) {
+    TreeError DestroySubtreeNode (Tree <T> *tree, Node <T> *node) {
         PushLog (3);
         
         custom_assert (tree, pointer_is_null, NULL_TREE_POINTER);
@@ -150,7 +150,7 @@ namespace Tree {
     }
     
     template <typename T>
-    TreeError DestroySingleNode_ (Node <T> *node) {
+    TreeError DestroySingleNode (Node <T> *node) {
         PushLog (3);
     
         if (!node) {
@@ -248,19 +248,19 @@ namespace Tree {
         fprintf (stream, "( ");
     
         if (printType == PREFIX_PRINT)
-            WriteError (tree, PrintNodeValue (node));
+            WriteError (tree, PrintNodeValue (node, stream));
         
         if (node->left)
             InternalPrint_ (node, printType, stream);
     
         if (printType == INFIX_PRINT)
-            WriteError (tree, PrintNodeValue (node));
+            WriteError (tree, PrintNodeValue (node, stream));
     
         if (node->right)
             InternalPrint_ (node, printType, stream);
     
         if (printType == POSTFIX_PRINT)
-            WriteError (tree, PrintNodeValue (node));
+            WriteError (tree, PrintNodeValue (node, stream));
         
         fprintf (stream, " )");
 
