@@ -23,10 +23,11 @@ namespace Tree {
         LOG_ERROR         = 1 << 5,
     };
 
-    enum TreeChild {
-        NO_CHILD    = 0,
+    enum TreeEdge {
+        NO_EDGE     = 0,
         LEFT_CHILD  = 1 << 0,
         RIGHT_CHILD = 1 << 1,
+        PARENT_NODE = 1 << 2,
     };
 
     enum PrintType {
@@ -70,7 +71,7 @@ namespace Tree {
     TreeError DestroySubtreeNode_ (Tree <T> *tree, Node <T> *node);
 
     template <typename T>
-    TreeError AddNode_    (Tree <T> *tree, Node <T> *leaf, TreeChild direction, CallData callData);
+    TreeError AddNode_    (Tree <T> *tree, Node <T> *leaf, TreeEdge direction, CallData callData);
     template <typename T>
     TreeError DeleteNode_ (Tree <T> *tree, Node <T> *nodePointer, CallData callData);
     

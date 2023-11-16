@@ -6,7 +6,7 @@
 int main () {
     PushLog (1);
 
-    Tree::Tree <char> tree = {};
+    Tree::Tree <char *> tree = {};
 
     Tree::InitTree_    (&tree, {});
 

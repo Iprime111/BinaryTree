@@ -163,11 +163,13 @@ namespace Tree {
     }
     
     template <typename T>
-    TreeError AddNode_ (Tree <T> *tree, Node <T> *leaf, TreeChild direction, CallData callData) {
+    TreeError AddNode_ (Tree <T> *tree, Node <T> *leaf, TreeEdge direction, CallData callData) {
         PushLog (3);
         
         custom_assert (tree,   pointer_is_null, NULL_TREE_POINTER);
         custom_assert (leaf,   pointer_is_null, NULL_NODE_POINTER);
+
+        TreeVerification (tree);
     
         Node <T> **child = NULL;
     
@@ -180,7 +182,8 @@ namespace Tree {
                 child = &(leaf->right);
                 break;
     
-            case NO_CHILD:
+            case PARENT_NODE:
+            case NO_EDGE:
             default:
                 RETURN NO_TREE_ERRORS;
                 break;

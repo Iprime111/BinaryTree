@@ -22,7 +22,7 @@ namespace Tree {
     const size_t MAX_TREE_NODE_DATA_SIZE  = 256;
 
     template <typename T>
-    static TreeError DumpNodeConnection    (Node <T> *node, TreeChild direction, char *color,  Buffer <char> *graphvizBuffer);
+    static TreeError DumpNodeConnection    (Node <T> *node, TreeEdge direction, char *color,  Buffer <char> *graphvizBuffer);
     template <typename T>
     static TreeError DumpTreeNodeRecursive (Tree <T> *tree, Node <T> *node, Buffer <char> *graphvizBuffer);
     template <typename T>
@@ -100,7 +100,7 @@ namespace Tree {
     }
     
     template <typename T>
-    static TreeError DumpNodeConnection (Node <T> *node, TreeChild direction, char *color, Buffer <char> *graphvizBuffer) {
+    static TreeError DumpNodeConnection (Node <T> *node, TreeEdge direction, char *color, Buffer <char> *graphvizBuffer) {
         PushLog (3);
 
         custom_assert (node,           pointer_is_null, NULL_NODE_POINTER);
@@ -113,19 +113,21 @@ namespace Tree {
         snprintf (nodeIndexBuffer, MAX_TREE_NODE_INDEX_SIZE, "%lu", (unsigned long) node);
         WriteDataWithErrorCheck (graphvizBuffer, nodeIndexBuffer);
 
-        Node <T> *child = NULL;
+        Node <T> *nextNode = NULL;
 
         if (direction == LEFT_CHILD) {
             WriteDataWithErrorCheck (graphvizBuffer, ":left");
-            child = node->left;
+            nextNode = node->left;
         } else if (direction == RIGHT_CHILD) {
             WriteDataWithErrorCheck (graphvizBuffer, ":right");
-            child = node->right;
+            nextNode = node->right;
+        } else if (direction == PARENT_NODE) {
+            nextNode = node->parent;
         }
 
         WriteDataWithErrorCheck (graphvizBuffer, " -> ");
     
-        snprintf (nodeIndexBuffer, MAX_TREE_NODE_INDEX_SIZE, "%lu", (unsigned long) child);
+        snprintf (nodeIndexBuffer, MAX_TREE_NODE_INDEX_SIZE, "%lu", (unsigned long) nextNode);
         WriteDataWithErrorCheck (graphvizBuffer, nodeIndexBuffer);
 
         WriteDataWithErrorCheck (graphvizBuffer, " [color=\"");
