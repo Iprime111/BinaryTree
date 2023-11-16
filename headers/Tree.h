@@ -58,7 +58,7 @@ namespace Tree {
     
         TreeError errors = NO_TREE_ERRORS;
     
-        #define VerifyChild_(child) errors = (TreeError) (VerifyNode_ (tree, node->child) | errors); 
+        #define VerifyChild_(child) errors = (TreeError) (VerifyNode (tree, node->child) | errors); 
     
         if (node->left)
             VerifyChild_ (left);
@@ -98,6 +98,8 @@ namespace Tree {
         
         tree->root->left  = NULL;
         tree->root->right = NULL;
+
+        tree->creationData = callData;
     
         TreeVerification (tree);
     
@@ -126,7 +128,7 @@ namespace Tree {
         TreeError errors = DestroySubtreeNode (tree, tree->root);
     
         tree->root = NULL;
-        tree->creationData = {};
+        tree->creationData = CallData {NULL, -1, NULL};
     
         RETURN errors;
     }
