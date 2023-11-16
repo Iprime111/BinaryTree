@@ -242,7 +242,7 @@ namespace Tree {
         custom_assert (tree,   pointer_is_null, NULL_TREE_POINTER);
         custom_assert (stream, pointer_is_null, OUTPUT_ERROR);
     
-        InternalPrint_ (tree->root, printType, stream);           
+        InternalPrint_ (tree, tree->root, printType, stream);           
     
         RETURN tree->errors;
     }
