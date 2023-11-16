@@ -251,22 +251,23 @@ namespace Tree {
     static TreeError InternalPrint_ (Tree <T> *tree, Node <T> *node, PrintType printType, FILE *stream) {
         PushLog (3);
         
-        custom_assert (node,   pointer_is_null, NULL_NODE_POINTER);
         custom_assert (stream, pointer_is_null, OUTPUT_ERROR);
     
+        if (!node) {
+            fprintf (stream, "nil");
+        }
+
         fprintf (stream, " ( ");
     
         if (printType == PREFIX_PRINT)
             WriteError (tree, PrintNodeValue (node, stream));
         
-        if (node->left)
-            InternalPrint_ (tree, node->left, printType, stream);
+        InternalPrint_ (tree, node->left, printType, stream);
     
         if (printType == INFIX_PRINT)
             WriteError (tree, PrintNodeValue (node, stream));
     
-        if (node->right)
-            InternalPrint_ (tree, node->right, printType, stream);
+        InternalPrint_ (tree, node->right, printType, stream);
     
         if (printType == POSTFIX_PRINT)
             WriteError (tree, PrintNodeValue (node, stream));
