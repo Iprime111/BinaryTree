@@ -8,7 +8,7 @@ namespace Tree {
 
     struct CallData {
         const char *file;
-        const int line;
+        int line;
         const char *function;
     };
 
