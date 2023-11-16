@@ -8,9 +8,9 @@ namespace Tree {
     const size_t MAX_NODE_DATA_LENGTH = 256;
 
     struct CallData {
-        char *file;
-        int line;
-        char *function;
+        const char *file;
+        const int line;
+        const char *function;
     };
 
     enum TreeError {
