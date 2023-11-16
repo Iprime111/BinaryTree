@@ -93,7 +93,7 @@ namespace Tree {
 
         if (node->right) {
             DumpNodeConnection    (node, RIGHT_CHILD, DUMP_NEXT_CONNECTION_COLOR, graphvizBuffer);
-            DumpTreeNodeRecursive (tree, node->left,  graphvizBuffer);
+            DumpTreeNodeRecursive (tree, node->right,  graphvizBuffer);
         }
 
         RETURN tree->errors;
