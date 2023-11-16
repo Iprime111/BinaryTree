@@ -260,13 +260,13 @@ namespace Tree {
             WriteError (tree, PrintNodeValue (node, stream));
         
         if (node->left)
-            InternalPrint_ (tree, node, printType, stream);
+            InternalPrint_ (tree, node->left, printType, stream);
     
         if (printType == INFIX_PRINT)
             WriteError (tree, PrintNodeValue (node, stream));
     
         if (node->right)
-            InternalPrint_ (tree, node, printType, stream);
+            InternalPrint_ (tree, node->right, printType, stream);
     
         if (printType == POSTFIX_PRINT)
             WriteError (tree, PrintNodeValue (node, stream));
