@@ -254,7 +254,7 @@ namespace Tree {
         custom_assert (stream, pointer_is_null, OUTPUT_ERROR);
     
         if (!node) {
-            fprintf (stream, "nil");
+            fprintf (stream, " nil");
             RETURN NO_TREE_ERRORS;
         }
 
