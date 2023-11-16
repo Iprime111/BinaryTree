@@ -31,7 +31,7 @@ namespace Tree {
     static TreeError RecursiveTreeVerification (Tree <T> *tree, Node <T> *node);
     
     template <typename T>
-    static TreeError InternalPrint_ (Node <T> *node, PrintType printType, FILE *stream);
+    static TreeError InternalPrint_ (Tree <T> *tree, Node <T> *node, PrintType printType, FILE *stream);
     
     template <typename T>
     TreeError VerifyTree (Tree <T> *tree) {
