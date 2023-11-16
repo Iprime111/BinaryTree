@@ -254,7 +254,7 @@ namespace Tree {
         custom_assert (node,   pointer_is_null, NULL_NODE_POINTER);
         custom_assert (stream, pointer_is_null, OUTPUT_ERROR);
     
-        fprintf (stream, "( ");
+        fprintf (stream, " ( ");
     
         if (printType == PREFIX_PRINT)
             WriteError (tree, PrintNodeValue (node, stream));
