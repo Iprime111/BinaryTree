@@ -5,7 +5,6 @@
 #include <stddef.h>
 
 namespace Tree {
-    const size_t MAX_NODE_DATA_LENGTH = 256;
 
     struct CallData {
         const char *file;
@@ -54,6 +53,9 @@ namespace Tree {
     };
     
     template <typename T>
+    TreeError NodeDestructor (Node <T> *node);
+    
+    template <typename T>
     TreeError VerifyTree  (Tree <T> *tree);
     template <typename T>
     TreeError VerifyNode  (Tree <T> *tree, Node <T> *node);
@@ -83,6 +85,9 @@ namespace Tree {
     template <typename T>
     TreeError SnprintNodeValue (Node <T> *node, char *buffer, size_t maxLength);
 
+    template <typename T>
+    TreeError TreeDump_ (Tree <T> *tree, CallData callData);
+
     #define CreateCallData {__FILE__, __LINE__, __PRETTY_FUNCTION__}
 
     #define InitTree(tree) InitTree_ (tree, CreateCallData)
@@ -92,5 +97,7 @@ namespace Tree {
     #define DeleteNode(tree, nodePointer)  DeleteNode_ (tree, nodePointer,     CreateCallData)
 
     #define PrintTree(tree, printType, stream) PrintTree_ (tree, printType, stream, CreateCallData)
+
+    #define TreeDump(tree) TreeDump_ (tree, CreateCallData);
 }
 #endif

@@ -271,6 +271,10 @@ namespace Tree {
     #undef WriteError
     #undef ReturnError
 
+    template <typename T>
+    TreeError NodeDestructor (Node <T> *node) {
+        return NO_TREE_ERRORS;
+    }
 }
 
 #endif
