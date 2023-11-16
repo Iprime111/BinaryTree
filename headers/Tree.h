@@ -156,6 +156,8 @@ namespace Tree {
         if (!node) {
             RETURN NULL_ROOT_POINTER;
         }
+
+        NodeDataDestructor (node);
     
         free (node);
     
@@ -272,7 +274,7 @@ namespace Tree {
     #undef ReturnError
 
     template <typename T>
-    TreeError NodeDestructor (Node <T> *node) {
+    TreeError NodeDataDestructor (Node <T> *node) {
         return NO_TREE_ERRORS;
     }
 }

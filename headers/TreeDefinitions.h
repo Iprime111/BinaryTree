@@ -53,7 +53,7 @@ namespace Tree {
     };
     
     template <typename T>
-    TreeError NodeDestructor (Node <T> *node);
+    TreeError NodeDataDestructor (Node <T> *node);
     
     template <typename T>
     TreeError VerifyTree  (Tree <T> *tree);
