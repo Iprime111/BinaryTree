@@ -255,6 +255,7 @@ namespace Tree {
     
         if (!node) {
             fprintf (stream, "nil");
+            RETURN NO_TREE_ERRORS;
         }
 
         fprintf (stream, " ( ");
