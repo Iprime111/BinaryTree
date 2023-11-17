@@ -88,6 +88,9 @@ namespace Tree {
     template <typename T>
     TreeError TreeDump_ (Tree <T> *tree, CallData callData);
 
+    template <typename T>
+    Node <T> *NextNode (Node <T> *node, TreeEdge direction);
+
     #define CreateCallData {__FILE__, __LINE__, __PRETTY_FUNCTION__}
 
     #define InitTree(tree) InitTree_ (tree, CreateCallData)
