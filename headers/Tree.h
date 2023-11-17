@@ -34,7 +34,7 @@ namespace Tree {
     static TreeError InternalPrint_ (Tree <T> *tree, Node <T> *node, PrintType printType, FILE *stream);
 
     template <typename T>
-    static TreeError FindNodeInternal_ (Node <T> *root, Node <T> **foundNode, Buffer <TreeEdge> *nodePath, T *data, nodeComparator_t comparator)
+    static TreeError FindNodeInternal_ (Node <T> *root, Node <T> **foundNode, Buffer <TreeEdge> *nodePath, T *data, nodeComparator_t comparator);
     
     template <typename T>
     TreeError VerifyTree (Tree <T> *tree) {
