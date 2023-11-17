@@ -32,6 +32,9 @@ namespace Tree {
     
     template <typename T>
     static TreeError InternalPrint_ (Tree <T> *tree, Node <T> *node, PrintType printType, FILE *stream);
+
+    template <typename T>
+    static TreeError FindNodeInternal_ (Node <T> *root, Node <T> **foundNode, Buffer <TreeEdge> *nodePath, T *data, nodeComparator_t comparator)
     
     template <typename T>
     TreeError VerifyTree (Tree <T> *tree) {
@@ -303,6 +306,46 @@ namespace Tree {
                 break;
         }
 
+    }
+
+    template <typename T>
+    TreeError FindNode (Tree <T> *tree, Node <T> **foundNode, Buffer <TreeEdge> *nodePath, T *data, nodeComparator_t comparator) {
+        PushLog (3);
+
+        RETURN FindNodeInternal_ (tree->root, foundNode, nodePath, data, comparator);
+    }
+
+    template <typename T>
+    static TreeError FindNodeInternal_ (Node <T> *root, Node <T> **foundNode, Buffer <TreeEdge> *nodePath, T *data, nodeComparator_t comparator) {
+        PushLog (4);
+
+        if (!root) {
+            RETURN NULL_NODE_POINTER;
+        }
+
+        if (!comparator (&root->nodeData, data)) {
+            RETURN NO_TREE_ERRORS;
+        }
+
+
+        TreeEdge currentEdge = LEFT_CHILD;
+
+        WriteDataToBuffer (nodePath, &currentEdge, sizeof (TreeEdge));
+        if (FindNodeInternal_ (root->left, foundNode, nodePath, data, comparator) == NO_TREE_ERRORS) {
+            RETURN NO_TREE_ERRORS;
+        }
+
+        nodePath->currentIndex--;
+
+        currentEdge = RIGHT_CHILD;
+        WriteDataToBuffer (nodePath, &currentEdge, sizeof (TreeEdge));
+        if (FindNodeInternal_c(root->right, foundNode, nodePath, data, comparator) == NO_TREE_ERRORS) {
+            RETURN NO_TREE_ERRORS;
+        }
+
+        nodePath.currentIndex--;
+
+        RETURN NULL_NODE_POINTER;
     }
     
     #undef WriteError

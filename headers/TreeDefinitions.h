@@ -6,6 +6,8 @@
 
 namespace Tree {
 
+    typedef int (*nodeComparator_t) (void *, void *);
+
     struct CallData {
         const char *file;
         int line;
@@ -61,9 +63,9 @@ namespace Tree {
     TreeError VerifyNode  (Tree <T> *tree, Node <T> *node);
 
     template <typename T>
-    TreeError InitTree_    (Tree <T> *tree,  CallData callData);
+    TreeError InitTree_   (Tree <T> *tree,  CallData callData);
     template <typename T>
-    TreeError InitNode_    (Node <T> **node, CallData callData);
+    TreeError InitNode_   (Node <T> **node, CallData callData);
 
     template <typename T>
     TreeError DestroyTree        (Tree <T> *tree);
@@ -90,6 +92,9 @@ namespace Tree {
 
     template <typename T>
     Node <T> *NextNode (Node <T> *node, TreeEdge direction);
+
+    template <typename T>
+    TreeError FindNode (Tree <T> *tree, Node <T> **foundNode, Buffer <TreeEdge> *nodePath, T *data, nodeComparator_t comparator);
 
     #define CreateCallData {__FILE__, __LINE__, __PRETTY_FUNCTION__}
 
