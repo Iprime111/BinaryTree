@@ -278,6 +278,32 @@ namespace Tree {
         RETURN NO_TREE_ERRORS;
     }
     
+    template <typename T>
+    Node <T> *NextNode (Node <T> *node, TreeEdge direction) {
+        PushLog (4);
+
+        custom_assert (node, pointer_is_null, NULL_NODE_POINTER);
+        
+        switch (direction) {
+            case LEFT_CHILD:
+                RETURN node->left;
+                break;
+
+            case RIGHT_CHILD:
+                RETURN node->right;
+                break;
+
+            case PARENT_NODE:
+                RETURN node->parent;
+                break;
+
+            case NO_EDGE:
+            default:
+                RETURN NULL;
+                break;
+        }
+
+    }
     
     #undef WriteError
     #undef ReturnError
