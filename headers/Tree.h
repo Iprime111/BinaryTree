@@ -343,7 +343,7 @@ namespace Tree {
             RETURN NO_TREE_ERRORS;
         }
 
-        nodePath.currentIndex--;
+        nodePath->currentIndex--;
 
         RETURN NULL_NODE_POINTER;
     }
