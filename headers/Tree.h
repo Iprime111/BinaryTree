@@ -324,9 +324,9 @@ namespace Tree {
         }
 
         if (!comparator (&root->nodeData, data)) {
+            *foundNode = root;
             RETURN NO_TREE_ERRORS;
         }
-
 
         TreeEdge currentEdge = LEFT_CHILD;
 
