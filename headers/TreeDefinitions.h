@@ -4,6 +4,8 @@
 #include <bits/types/FILE.h>
 #include <stddef.h>
 
+#include "Buffer.h"
+
 namespace Tree {
 
     typedef int (*nodeComparator_t) (void *, void *);
