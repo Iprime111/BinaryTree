@@ -330,7 +330,7 @@ namespace Tree {
 
         TreeEdge currentEdge = LEFT_CHILD;
 
-        WriteDataToBuffer (nodePath, &currentEdge, sizeof (TreeEdge));
+        WriteDataToBuffer (nodePath, &currentEdge, 1);
         if (FindNodeInternal_ (root->left, foundNode, nodePath, data, comparator) == NO_TREE_ERRORS) {
             RETURN NO_TREE_ERRORS;
         }
@@ -338,7 +338,7 @@ namespace Tree {
         nodePath->currentIndex--;
 
         currentEdge = RIGHT_CHILD;
-        WriteDataToBuffer (nodePath, &currentEdge, sizeof (TreeEdge));
+        WriteDataToBuffer (nodePath, &currentEdge, 1);
         if (FindNodeInternal_(root->right, foundNode, nodePath, data, comparator) == NO_TREE_ERRORS) {
             RETURN NO_TREE_ERRORS;
         }
