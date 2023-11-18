@@ -285,7 +285,7 @@ namespace Tree {
     Node <T> *NextNode (Node <T> *node, TreeEdge direction) {
         PushLog (4);
 
-        custom_assert (node, pointer_is_null, NULL_NODE_POINTER);
+        custom_assert (node, pointer_is_null, NULL);
         
         switch (direction) {
             case LEFT_CHILD:
