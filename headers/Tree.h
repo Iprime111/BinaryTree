@@ -339,7 +339,7 @@ namespace Tree {
 
         currentEdge = RIGHT_CHILD;
         WriteDataToBuffer (nodePath, &currentEdge, sizeof (TreeEdge));
-        if (FindNodeInternal_c(root->right, foundNode, nodePath, data, comparator) == NO_TREE_ERRORS) {
+        if (FindNodeInternal_(root->right, foundNode, nodePath, data, comparator) == NO_TREE_ERRORS) {
             RETURN NO_TREE_ERRORS;
         }
 
