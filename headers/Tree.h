@@ -149,14 +149,8 @@ namespace Tree {
         custom_assert (tree, pointer_is_null, NULL_TREE_POINTER);
         custom_assert (node, pointer_is_null, NULL_NODE_POINTER);
 
-        CallForChildren (node,  WriteError (tree, DestroySubtreeNode (tree, child_)))
+        CallForChildren (node,  WriteError (tree, DestroySubtreeNode (tree, child_)));
     
-        if (node->left)
-            WriteError (tree, DestroySubtreeNode (tree, node->left));
-    
-        if (node->right)
-            WriteError (tree, DestroySubtreeNode (tree, node->right));
-        
         WriteError (tree, DestroySingleNode (node));
     
         RETURN tree->errors;
