@@ -27,11 +27,11 @@ namespace Tree {
                     }                               \
                 }while (0)
     
-    #define CallForChild(childNode, callback) if (childNode) { Tree::Node <T> *child_ = childNode;  callback; }
-    #define CallForChildren(NODE, callback)         \
-        do {                                        \
-            CallForChild (NODE->left, callback);    \
-            CallForChild (NODE->right, callback);   \
+    #define CallForChild(childNode, ...) if (childNode) { Node <T> *child_ = childNode;  __VA_ARGS__; }
+    #define CallForChildren(NODE, ...)                  \
+        do {                                            \
+            CallForChild (NODE->left,  __VA_ARGS__);    \
+            CallForChild (NODE->right, __VA_ARGS__);    \
         } while (0)
 
     template <typename T>
