@@ -27,6 +27,13 @@ namespace Tree {
                     }                               \
                 }while (0)
     
+    #define CallForChild(childNode, callback) if (childNode) { Tree::Node <T> *child_ = childNode;  callback; }
+    #define CallForChildren(NODE, callback)         \
+        do {                                        \
+            CallForChild (NODE->left, callback);    \
+            CallForChild (NODE->right, callback);   \
+        } while (0)
+
     template <typename T>
     static TreeError RecursiveTreeVerification (Tree <T> *tree, Node <T> *node);
     
@@ -61,14 +68,10 @@ namespace Tree {
     
         TreeError errors = NO_TREE_ERRORS;
     
-        #define VerifyChild_(child) errors = (TreeError) (VerifyNode (tree, node->child) | errors); 
-    
-        if (node->left)
-            VerifyChild_ (left);
-    
-        if (node->right)
-            VerifyChild_(right);
-    
+        #define VerifyChild_(child) errors = (TreeError) (VerifyNode (tree, child) | errors);
+
+        CallForChildren (node, VerifyChild_ (child_));
+
         #undef VerifyChild_
     
         RETURN errors;
@@ -145,6 +148,8 @@ namespace Tree {
         
         custom_assert (tree, pointer_is_null, NULL_TREE_POINTER);
         custom_assert (node, pointer_is_null, NULL_NODE_POINTER);
+
+        CallForChildren (node,  WriteError (tree, DestroySubtreeNode (tree, child_)))
     
         if (node->left)
             WriteError (tree, DestroySubtreeNode (tree, node->left));
